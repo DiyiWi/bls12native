@@ -109,6 +109,15 @@ func (r *G1) Neg(p *G1) *G1 {
 	fqNeg(&r.Y, &r.Y)
 	return r
 }
+// Unmarshal point from input slice, returns unconsumed remainder of the slice
+// (depends on compression flag).
+func (r *G1) Unmarshal(in []byte) []byte {
+	return GUnmarshal(r, in)
+}
+
+func (r *G1) Marshal() []byte {
+	return GMarshal(r, 1)
+}
 
 func (r *G1) Double(p *G1) (ret *G1) {
 	ret = r
